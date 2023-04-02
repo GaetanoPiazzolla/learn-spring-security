@@ -10,10 +10,12 @@ Module  1 - Lesson 6</description>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
+
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.2.RELEASE</version>
+        <version>3.0.5</version>
         <relativePath></relativePath> <!-- lookup parent from repository -->
     </parent>
 
@@ -34,30 +36,28 @@ Module  1 - Lesson 6</description>
             <artifactId>tomcat-embed-jasper</artifactId>
         </dependency>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>${validation-api.version}</version>
+        </dependency>
 
         <!-- security -->
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
         <!-- marshalling -->
-
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
 
         <!-- common utilities -->
-
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -126,7 +126,7 @@ Module  1 - Lesson 6</description>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>        
+        </dependency>
 
     </dependencies>
 
@@ -153,16 +153,13 @@ Module  1 - Lesson 6</description>
 
         <!-- non-dependencies -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
+        <java.version>17</java.version>
         
         <!-- commons and utils -->
         <commons-lang3.version>3.5</commons-lang3.version>
         <guava.version>21.0</guava.version>
-        
-        <!-- persistence -->       
-        <validation-api.version>1.1.0.Final</validation-api.version>
-  
-        <rest-assured.version>2.9.0</rest-assured.version>
+
+       <validation-api.version>2.0.1.Final</validation-api.version>
 
         <!-- maven plugins -->
 		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>

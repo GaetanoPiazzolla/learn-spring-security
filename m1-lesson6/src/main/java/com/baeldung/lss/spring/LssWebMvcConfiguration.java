@@ -5,16 +5,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.baeldung.lss.persistence.UserRepository;
 import com.baeldung.lss.web.model.User;
 
-@EnableWebMvc
 @Configuration
-public class LssWebMvcConfiguration extends WebMvcConfigurerAdapter {
+public class LssWebMvcConfiguration implements WebMvcConfigurer {
     
     @Autowired
     private UserRepository userRepository;
@@ -28,12 +26,7 @@ public class LssWebMvcConfiguration extends WebMvcConfigurerAdapter {
     
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(new  Converter<String, User>() {
-            @Override
-            public User convert(String id) {
-                return userRepository.findUser(Long.valueOf(id));
-            }
-        });
+        registry.addConverter((Converter<String, User>) id -> userRepository.findUser(Long.valueOf(id)));
        
     }
 
