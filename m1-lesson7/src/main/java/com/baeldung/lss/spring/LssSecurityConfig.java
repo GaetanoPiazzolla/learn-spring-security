@@ -1,16 +1,24 @@
 package com.baeldung.lss.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity
-public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
+@Configuration
+public class LssSecurityConfig {
+
+    private PasswordEncoder passwordEncoder;
 
     public LssSecurityConfig() {
         super();
+        this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
     //
@@ -18,14 +26,14 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception { // @formatter:off 
         auth.
-            inMemoryAuthentication().
-            withUser("user").password("pass").
+            inMemoryAuthentication().passwordEncoder(passwordEncoder).
+            withUser("user").password(passwordEncoder.encode("pass")).
             roles("USER");
     } // @formatter:on
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception { // @formatter:off
-        http
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {// @formatter:off
+        return http
         .authorizeRequests()
                 .anyRequest().authenticated()
         
@@ -35,11 +43,10 @@ public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
             loginProcessingUrl("/doLogin")
 
         .and()
-        .logout().permitAll().logoutUrl("/logout")
+        .logout().permitAll().logoutUrl("/doLogout")
         
         .and()
-        .csrf().disable()
-        ;
+        .csrf().disable().build();
     }
 
 }

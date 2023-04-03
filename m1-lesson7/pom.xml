@@ -8,19 +8,22 @@ Module  1 - Lesson 7</description>
     <groupId>com.baeldung.m1</groupId>
     <artifactId>learn-spring-security-m1-l7</artifactId>
     <version>0.1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.2.RELEASE</version>
+        <version>3.0.5</version>
         <relativePath></relativePath> <!-- lookup parent from repository -->
     </parent>
 
     <dependencies>
 
         <!-- web -->
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -33,25 +36,23 @@ Module  1 - Lesson 7</description>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>${validation-api.version}</version>
+        </dependency>
 
         <!-- security -->
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
         <!-- marshalling -->
-
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -64,11 +65,6 @@ Module  1 - Lesson 7</description>
         </dependency>
 
         <!-- persistence -->
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>org.hsqldb</groupId>
@@ -178,16 +174,14 @@ Module  1 - Lesson 7</description>
 
         <!-- non-dependencies -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
+        <java.version>17</java.version>
         
         <!-- commons and utils -->
         <commons-lang3.version>3.5</commons-lang3.version>
         <guava.version>21.0</guava.version>
         
-        <!-- persistence -->       
-        <validation-api.version>1.1.0.Final</validation-api.version>
-  
-        <rest-assured.version>2.9.0</rest-assured.version>
+        <!-- persistence -->
+        <validation-api.version>2.0.1.Final</validation-api.version>
         
         <!-- marshalling -->
         <jaxb-api.version>2.2.12</jaxb-api.version>
